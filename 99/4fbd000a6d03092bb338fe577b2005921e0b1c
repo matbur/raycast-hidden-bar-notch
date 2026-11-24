@@ -1,0 +1,28 @@
+src/lib/preferences.ts
+  s_438cc02f19580c::t_6533591a461d42 1-14
+README.md
+  s_438cc02f19580c::t_5316b0de6fd97b 26
+test/preferences.test.ts
+  s_438cc02f19580c::t_f4fcf528ef66a1 1-16
+src/lib/hidden-bar.ts
+  s_438cc02f19580c::t_0ba7a2326688e8 63-65,69-80
+  s_438cc02f19580c::t_bcafabe87b49e8 1,3-4,7
+  s_438cc02f19580c::t_8c7008bf7d8637 92-93,95
+  s_438cc02f19580c::t_341ab404642b41 39,41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "994fbd000a6d03092bb338fe577b2005921e0b1c",
+  "prompts": {},
+  "sessions": {
+    "s_438cc02f19580c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_df28ebdbfffekURZ2E3O6uEoaY",
+        "model": "claude-opus-5.5"
+      },
+      "human_author": "matbur <mateusz@burniak.pl>"
+    }
+  }
+}
