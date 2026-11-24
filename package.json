@@ -1,0 +1,45 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "hidden-bar-notch",
+  "title": "Hidden Bar and Notch",
+  "description": "Toggle Hidden Bar icons, alone or together with the zNotch notch.",
+  "icon": "icon.png",
+  "author": "matbur",
+  "categories": [
+    "System"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "toggle-hidden-bar",
+      "title": "Toggle Hidden Bar",
+      "description": "Expands or collapses the icons hidden by Hidden Bar.",
+      "mode": "no-view"
+    },
+    {
+      "name": "toggle-all",
+      "title": "Toggle Hidden Bar and Notch",
+      "description": "Toggles Hidden Bar and the zNotch notch at once.",
+      "mode": "no-view"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^2.13.1"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.2.0",
+    "@types/node": "^22.0.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^5.1.1"
+  },
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "lint": "ray lint",
+    "fix-lint": "ray lint --fix",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  }
+}
