@@ -1,0 +1,19 @@
+LICENSE
+  s_438cc02f19580c::t_d2958d24131ba9 1-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0544850bd943bb3829fbd77b03c1d491b7a64773",
+  "prompts": {},
+  "sessions": {
+    "s_438cc02f19580c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_df28ebdbfffekURZ2E3O6uEoaY",
+        "model": "claude-opus-5.5"
+      },
+      "human_author": "matbur <mateusz@burniak.pl>"
+    }
+  }
+}
