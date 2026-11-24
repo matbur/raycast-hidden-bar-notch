@@ -1,0 +1,19 @@
+Makefile
+  s_438cc02f19580c::t_c84fe4dc156434 1-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "687341f9bb7987d69ffd89ca22d1956b2a79e6a4",
+  "prompts": {},
+  "sessions": {
+    "s_438cc02f19580c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_df28ebdbfffekURZ2E3O6uEoaY",
+        "model": "claude-opus-5.5"
+      },
+      "human_author": "matbur <mateusz@burniak.pl>"
+    }
+  }
+}
