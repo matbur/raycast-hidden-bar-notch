@@ -23,7 +23,7 @@ npm run dev
 
 ## How it works
 
-Hidden Bar 1.8 has no URL scheme or AppleScript support. The commands read `globalKey` from `defaults export com.dwarvesv.minimalbar` and validate it (key code 0–127, boolean modifiers). They then send the shortcut with `osascript`: `tell application "System Events" to key code N using {…}`. If Hidden Bar isn't running, it is started in the background first (waits up to 2 s).
+Hidden Bar has no URL scheme or AppleScript support. The commands read `globalKey` from Hidden Bar's preferences and validate it (key code 0–127, boolean modifiers). The App Store build (1.8) keeps preferences in `~/Library/Containers/com.dwarvesv.minimalbar/…`, the direct build (1.13+) in `~/Library/Preferences/com.dwarvesv.minimalbar.plist`. The installed build's file is read first, then the other one. They then send the shortcut with `osascript`: `tell application "System Events" to key code N using {…}`. If Hidden Bar isn't running, it is started in the background first (waits up to 2 s).
 
 ## Limitations
 

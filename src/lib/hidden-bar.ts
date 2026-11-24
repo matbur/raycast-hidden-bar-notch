@@ -1,7 +1,10 @@
-import { getApplications } from "@raycast/api";
+import { Application, getApplications } from "@raycast/api";
 import { spawn } from "node:child_process";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { buildKeyCodeScript } from "./applescript";
 import { AppNotInstalledError, mapOsascriptError } from "./errors";
+import { preferenceDomains } from "./preferences";
 import { parseGlobalKey } from "./shortcut";
 
 export const HIDDEN_BAR_BUNDLE_ID = "com.dwarvesv.minimalbar";
@@ -33,9 +36,9 @@ function run(cmd: string, args: string[], input?: string): Promise<RunResult> {
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-async function isInstalled(): Promise<boolean> {
+async function findApp(): Promise<Application | undefined> {
   const apps = await getApplications();
-  return apps.some((a) => a.bundleId === HIDDEN_BAR_BUNDLE_ID);
+  return apps.find((a) => a.bundleId === HIDDEN_BAR_BUNDLE_ID);
 }
 
 async function isRunning(): Promise<boolean> {
@@ -57,13 +60,24 @@ async function ensureRunning(): Promise<void> {
   throw new Error("Hidden Bar didn't start within 2 s");
 }
 
-/** Reads the base64 value of `globalKey` from Hidden Bar's preferences (via cfprefsd, so it is current). */
-async function readGlobalKeyBase64(): Promise<string | undefined> {
-  const exported = await run("/usr/bin/defaults", ["export", HIDDEN_BAR_BUNDLE_ID, "-"]);
+/** Reads the base64 value of `globalKey` from one preferences domain (by path, via cfprefsd). */
+async function readGlobalKeyFrom(domain: string): Promise<string | undefined> {
+  const exported = await run("/usr/bin/defaults", ["export", domain, "-"]);
   if (exported.code !== 0) return undefined;
   const extracted = await run("/usr/bin/plutil", ["-extract", "globalKey", "raw", "-o", "-", "-"], exported.stdout);
   if (extracted.code !== 0) return undefined;
-  return extracted.stdout.trim();
+  return extracted.stdout.trim() || undefined;
+}
+
+/** Reads `globalKey` from the installed build's preferences, falling back to the other location. */
+async function readGlobalKeyBase64(app: Application): Promise<string | undefined> {
+  const isAppStoreBuild = existsSync(join(app.path, "Contents/_MASReceipt"));
+  for (const domain of preferenceDomains(HIDDEN_BAR_BUNDLE_ID, isAppStoreBuild)) {
+    if (!existsSync(`${domain}.plist`)) continue;
+    const value = await readGlobalKeyFrom(domain);
+    if (value) return value;
+  }
+  return undefined;
 }
 
 async function sendShortcut(script: string): Promise<void> {
@@ -75,9 +89,10 @@ async function sendShortcut(script: string): Promise<void> {
 
 /** Toggles Hidden Bar by sending its configured "Show or hide icons" shortcut. */
 export async function toggleHiddenBar(): Promise<void> {
-  if (!(await isInstalled())) throw new AppNotInstalledError("Hidden Bar");
+  const app = await findApp();
+  if (!app) throw new AppNotInstalledError("Hidden Bar");
   // Validate the shortcut before starting the app or sending any keys.
-  const script = buildKeyCodeScript(parseGlobalKey(await readGlobalKeyBase64()));
+  const script = buildKeyCodeScript(parseGlobalKey(await readGlobalKeyBase64(app)));
   await ensureRunning();
   await sendShortcut(script);
 }
