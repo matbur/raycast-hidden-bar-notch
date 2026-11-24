@@ -10,7 +10,9 @@ install: ## Install npm dependencies
 	npm install
 
 dev: install ## Install the extension in Raycast (dev mode, stop with Ctrl+C)
-	npm run dev
+	@# ray develop exits with 1 on Ctrl+C; treat that as a normal stop.
+	@status=0; npm run dev || status=$$?; \
+		if [ $$status -ne 0 ] && [ $$status -ne 1 ] && [ $$status -ne 130 ]; then exit $$status; fi
 
 build: ## Build the extension
 	npm run build
