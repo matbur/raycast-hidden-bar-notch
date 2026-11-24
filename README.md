@@ -7,7 +7,7 @@ A local Raycast extension with two commands:
 
 ## Requirements
 
-- Hidden Bar (`com.dwarvesv.minimalbar`) with a **Show or hide icons** shortcut set in its preferences. The extension reads that shortcut every time it runs, so if you change it in Hidden Bar you don't have to change anything here.
+- Hidden Bar (`com.dwarvesv.minimalbar`) with a global shortcut set. Hidden Bar has no shortcut by default, and without one the commands show "No Hidden Bar shortcut set". To set it, right-click the Hidden Bar arrow in the menu bar, choose **Preferences...**, and on the **General** tab click the **Keyboard shortcut** field and press the keys you want (e.g. Ctrl+Opt+Cmd+B). The extension reads that shortcut every time it runs, so if you change it in Hidden Bar you don't have to change anything here.
 - zNotch, only for the combined command.
 - The **Accessibility** permission for Raycast: System Settings → Privacy & Security → Accessibility → turn on Raycast. Without it macOS blocks the shortcut, and the extension shows a toast with a button that opens these settings.
 - Node.js and npm.
@@ -23,7 +23,11 @@ npm run dev
 
 ## How it works
 
-Hidden Bar has no URL scheme or AppleScript support. The commands read `globalKey` from Hidden Bar's preferences and validate it (key code 0–127, boolean modifiers). The App Store build (1.8) keeps preferences in `~/Library/Containers/com.dwarvesv.minimalbar/…`, the direct build (1.13+) in `~/Library/Preferences/com.dwarvesv.minimalbar.plist`. The installed build's file is read first, then the other one. They then send the shortcut with `osascript`: `tell application "System Events" to key code N using {…}`. If Hidden Bar isn't running, it is started in the background first (waits up to 2 s).
+Hidden Bar has no URL scheme or AppleScript support, so the commands press Hidden Bar's own shortcut:
+
+1. Read `globalKey` from Hidden Bar's preferences and validate it (key code 0–127, boolean modifiers). The App Store build (1.8) keeps preferences in `~/Library/Containers/com.dwarvesv.minimalbar/…`, the direct build (1.13+) in `~/Library/Preferences/com.dwarvesv.minimalbar.plist`. The installed build's file is read first, then the other one.
+2. If Hidden Bar isn't running, start it in the background (waits up to 2 s).
+3. Send the shortcut with `osascript`: `tell application "System Events" to key code N using {…}`.
 
 ## Limitations
 
