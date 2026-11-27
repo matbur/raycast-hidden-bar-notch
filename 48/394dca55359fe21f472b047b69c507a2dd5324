@@ -1,0 +1,19 @@
+assets/icon.svg
+  s_06f9609dca74d4::t_10efba51552ebf 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "48394dca55359fe21f472b047b69c507a2dd5324",
+  "prompts": {},
+  "sessions": {
+    "s_06f9609dca74d4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_de387bc62ffeF4gbd0lDd4v1WX",
+        "model": "claude-opus-5.5"
+      },
+      "human_author": "matbur <mateusz@burniak.pl>"
+    }
+  }
+}
