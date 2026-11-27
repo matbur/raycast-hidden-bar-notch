@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/icon.svg" width="128" height="128" alt="Hidden Bar and Notch logo">
+</p>
+
 # Hidden Bar and Notch (Raycast)
 
 A local Raycast extension with two commands:
@@ -15,11 +19,10 @@ A local Raycast extension with two commands:
 ## Installation
 
 ```sh
-npm install
-npm run dev
+make dev
 ```
 
-`npm run dev` (`ray develop`) adds the extension to Raycast and keeps it updated while it runs. Once the commands show up in Raycast, you can stop it with Ctrl+C. The extension stays installed.
+`make dev` installs the npm dependencies and runs `ray develop`, which adds the extension to Raycast and keeps it updated while it runs. Once the commands show up in Raycast, you can stop it with Ctrl+C. The extension stays installed.
 
 ## How it works
 
@@ -38,7 +41,7 @@ Hidden Bar has no URL scheme or AppleScript support, so the commands press Hidde
 ## Development
 
 ```sh
-npm test       # vitest: shortcut parser, AppleScript, error mapping, HUD message
-npm run lint   # ray lint (ESLint + Prettier + manifest)
-npm run build
+make test    # vitest: shortcut parser, AppleScript, error mapping, HUD message
+make lint    # ray lint (ESLint + Prettier + manifest)
+make build
 ```
