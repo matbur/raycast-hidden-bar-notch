@@ -1,0 +1,22 @@
+README.md
+  s_06f9609dca74d4::t_32709fc0a3b7c8 1-3
+  s_06f9609dca74d4::t_962888066a213b 4
+  s_06f9609dca74d4::t_1674999d5b2e57 22,25
+  s_06f9609dca74d4::t_043a81ad7b7279 44-46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a2e1b6d389781c5c26b1bda5f0da1ea9696a1199",
+  "prompts": {},
+  "sessions": {
+    "s_06f9609dca74d4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_de387bc62ffeF4gbd0lDd4v1WX",
+        "model": "claude-opus-5.5"
+      },
+      "human_author": "matbur <mateusz@burniak.pl>"
+    }
+  }
+}
